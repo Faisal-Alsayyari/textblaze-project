@@ -4,12 +4,14 @@ Write a JavaScript function that takes an HTMLElement within a page and then ret
 
 The generated selector should be:
 
-Short and readable (ideally, what a human would write)
-Robust to page changes (if the page is later changed, the selector will ideally still work; this likely requires the selector to be short and to reference as little of the page as possible)
+- Short and readable (ideally, what a human would write)
+- Robust to page changes (if the page is later changed, the selector will ideally still work; this likely requires the selector to be short and to reference as little of the page as possible)
 
 # Approach
 
-There are 2 heuristics that guided the design: (1) very few attributes are robust, and (2) referencing ancestor elements should be minimized to avoid UI changes (for example, a wrapper div is added).
+There are 2 heuristics that guided the design: 
+- (1) very few attributes are robust, and 
+- (2) referencing ancestor elements should be minimized to avoid UI changes (for example, a wrapper div is added).
 
 Not all attributes are robust to page refreshes, UI changes, etc. Therefore, we only consider a few attributes as stable anchors: id, aria-label, and data-testid. I found other attributes, like class or role, to be unstable. This list can expand and contract in production-grade testing.*
 
