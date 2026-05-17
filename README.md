@@ -17,7 +17,7 @@ Not all attributes are robust to page refreshes, UI changes, etc. Therefore, we 
 
 To be robust, we want to reference as little of the page as possible. This means only referencing the element as a descendant when necessary (for example, going from //h2 to //div/h2.)
 
-The algorithm starts from the selected element and walks upward through it's ancestors until a unique selector is found. At each step, it attempts to add a stable anchor, a parent element, and a positional index. A stable anchor is only added when present, and a positional index is only added if the element doesn't have a stable anchor AND the current condition is if the child has at least 1 sibling of the same type. At every step, the selector is validated with document.evaluate(...). Once the selector uniquely identifies the element, it is returned immediately. No more steps are taken, as to reference as little of the page as possible.
+The algorithm starts from the selected element and walks upward through it's ancestors until a stable anchor is found. At each step, it attempts to add a stable anchor, a parent element, and a positional index. A stable anchor is only added when present, and a positional index is only added if the element doesn't have a stable anchor AND the child has at least 1 sibling of the same type (to avoid redundant indexing). At every step, the selector is validated with document.evaluate(...). Once the selector **uniquely** identifies the element, it is returned immediately. No more steps are taken, as to reference as little of the page as possible.
 
 A common use case is if the selected element, or a close ancestor, has an id. This will result in selectors of the form:
 - //h2[@id="..."]
@@ -25,7 +25,7 @@ A common use case is if the selected element, or a close ancestor, has an id. Th
 
 # How to run
 
-I've provided an AI-generated index.html page to use for testing. Clicking on an element prints the generated selector path to the console.
+I've provided an AI-generated complex index.html page to use for testing. Clicking on an element prints the generated selector path to the console.
 
 # Limitations
 
