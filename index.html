@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>XPath Test Page</title>
+  <style>
+    body { font-family: sans-serif; margin: 0; display: flex; flex-direction: column; }
+    header { background: #2c3e50; color: white; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; }
+    nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 16px; }
+    nav ul li { position: relative; }
+    nav ul li a { color: white; text-decoration: none; padding: 4px 8px; }
+    nav ul li ul { display: none; position: absolute; background: #34495e; top: 100%; left: 0; min-width: 160px; }
+    nav ul li:hover ul { display: block; }
+    nav ul li ul li a { display: block; padding: 8px 12px; white-space: nowrap; }
+    .layout { display: flex; flex: 1; }
+    aside { width: 200px; background: #ecf0f1; padding: 16px; }
+    aside ul { list-style: disc; padding-left: 20px; }
+    main { flex: 1; padding: 24px; }
+    section { margin-bottom: 32px; border: 1px solid #ddd; border-radius: 6px; padding: 16px; }
+    h2 { margin-top: 0; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #ccc; padding: 8px 12px; text-align: left; }
+    th { background: #f4f4f4; }
+    tfoot td { font-weight: bold; background: #fafafa; }
+    .card-grid { display: flex; gap: 16px; flex-wrap: wrap; }
+    .card { border: 1px solid #ccc; border-radius: 6px; padding: 16px; width: 180px; }
+    .card .badge { display: inline-block; background: #3498db; color: white; border-radius: 12px; padding: 2px 8px; font-size: 0.75em; }
+    form label { display: block; margin-top: 12px; font-weight: bold; }
+    form input, form select, form textarea { width: 100%; box-sizing: border-box; padding: 6px; margin-top: 4px; }
+    form fieldset { border: 1px solid #ccc; border-radius: 4px; padding: 12px; margin-top: 12px; }
+    form legend { font-weight: bold; padding: 0 6px; }
+    footer { background: #2c3e50; color: #bdc3c7; text-align: center; padding: 12px; font-size: 0.85em; }
+    blockquote { border-left: 4px solid #3498db; margin: 12px 0; padding: 8px 16px; background: #f0f8ff; }
+    code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+    pre { background: #f4f4f4; padding: 12px; border-radius: 4px; overflow-x: auto; }
+    pre code { background: none; padding: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- ── HEADER / NAV ── -->
+  <header>
+    <span id="site-title">XPath Test Page</span>
+    <nav id="main-nav">
+      <ul>
+        <li><a href="#articles">Articles</a></li>
+        <li>
+          <a href="#data">Data</a>
+          <ul>
+            <li><a href="#table-section">Table</a></li>
+            <li><a href="#cards-section">Cards</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#forms">Forms</a>
+          <ul>
+            <li><a href="#simple-form">Simple</a></li>
+            <li><a href="#complex-form">Complex</a></li>
+          </ul>
+        </li>
+        <li><a href="#misc">Misc</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="layout">
+
+    <!-- ── SIDEBAR ── -->
+    <aside id="sidebar">
+      <h3>Contents</h3>
+      <ul>
+        <li><a href="#articles">Articles</a></li>
+        <li><a href="#table-section">Table</a></li>
+        <li><a href="#cards-section">Cards</a></li>
+        <li><a href="#simple-form">Simple Form</a></li>
+        <li><a href="#complex-form">Complex Form</a></li>
+        <li><a href="#misc">Misc</a></li>
+      </ul>
+      <hr />
+      <h3>Tags</h3>
+      <ul>
+        <li><span class="tag" data-tag="html">HTML</span></li>
+        <li><span class="tag" data-tag="xpath">XPath</span></li>
+        <li><span class="tag" data-tag="testing">Testing</span></li>
+      </ul>
+    </aside>
+
+    <!-- ── MAIN CONTENT ── -->
+    <main id="content">
+
+      <!-- Articles Section -->
+      <section id="articles">
+        <h2>Articles</h2>
+
+        <article id="article-1" data-category="intro">
+          <header>
+            <h3>Introduction to XPath</h3>
+            <span class="meta">By <strong>Alice</strong> &mdash; <time datetime="2026-01-10">Jan 10, 2026</time></span>
+          </header>
+          <p>XPath is a query language for selecting nodes in an <abbr title="Extensible Markup Language">XML</abbr> document.
+             It can also be used on <em>HTML</em> documents via the <code>document.evaluate()</code> API.</p>
+          <blockquote cite="https://www.w3.org/TR/xpath/">
+            <p>XPath uses a path notation — similar to URLs — for navigating through the hierarchical structure of an XML document.</p>
+            <footer>&mdash; W3C XPath Specification</footer>
+          </blockquote>
+          <p>Common axes include: <code>child</code>, <code>parent</code>, <code>ancestor</code>, <code>descendant</code>, <code>following-sibling</code>, and <code>preceding-sibling</code>.</p>
+        </article>
+
+        <article id="article-2" data-category="advanced">
+          <header>
+            <h3>Advanced XPath Patterns</h3>
+            <span class="meta">By <strong>Bob</strong> &mdash; <time datetime="2026-02-14">Feb 14, 2026</time></span>
+          </header>
+          <p>Predicates let you filter nodes. For example:</p>
+          <pre><code>//div[@class='card'][2]</code></pre>
+          <p>selects the <strong>second</strong> <code>&lt;div&gt;</code> element with class <code>card</code>.</p>
+          <ul>
+            <li>Use <code>position()</code> for index-based selection.</li>
+            <li>Use <code>contains()</code> for partial attribute matching.</li>
+            <li>Use <code>normalize-space()</code> to trim whitespace in text nodes.</li>
+            <li>Combine axes with predicates for precise targeting:
+              <ul>
+                <li><code>ancestor::table//td[last()]</code></li>
+                <li><code>following-sibling::li[position() &lt;= 3]</code></li>
+              </ul>
+            </li>
+          </ul>
+        </article>
+
+        <article id="article-3" data-category="tips">
+          <header>
+            <h3>Tips for Robust Selectors</h3>
+            <span class="meta">By <strong>Carol</strong></span>
+          </header>
+          <ol>
+            <li>Prefer <code>id</code> attributes when available — they produce the shortest, most stable paths.</li>
+            <li>Avoid relying solely on positional predicates (<code>[1]</code>, <code>[2]</code>) for dynamic content.</li>
+            <li>Use <code>data-*</code> attributes as stable anchors when IDs are absent.</li>
+          </ol>
+        </article>
+      </section>
+
+      <!-- Table Section -->
+      <section id="table-section">
+        <h2>Data Table</h2>
+        <table id="data-table" data-sortable="true">
+          <caption>Employee Directory</caption>
+          <thead>
+            <tr>
+              <th scope="col" data-col="id">#</th>
+              <th scope="col" data-col="name">Name</th>
+              <th scope="col" data-col="department">Department</th>
+              <th scope="col" data-col="role">Role</th>
+              <th scope="col" data-col="status">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-row="1" class="row-odd">
+              <td>1</td>
+              <td><a href="#emp-1">Alice Johnson</a></td>
+              <td>Engineering</td>
+              <td>Senior Dev</td>
+              <td><span class="status active">Active</span></td>
+            </tr>
+            <tr data-row="2" class="row-even">
+              <td>2</td>
+              <td><a href="#emp-2">Bob Smith</a></td>
+              <td>Design</td>
+              <td>UX Lead</td>
+              <td><span class="status active">Active</span></td>
+            </tr>
+            <tr data-row="3" class="row-odd">
+              <td>3</td>
+              <td><a href="#emp-3">Carol White</a></td>
+              <td>Engineering</td>
+              <td>QA Engineer</td>
+              <td><span class="status inactive">Inactive</span></td>
+            </tr>
+            <tr data-row="4" class="row-even">
+              <td>4</td>
+              <td><a href="#emp-4">Dave Brown</a></td>
+              <td>Marketing</td>
+              <td>Analyst</td>
+              <td><span class="status active">Active</span></td>
+            </tr>
+            <tr data-row="5" class="row-odd">
+              <td>5</td>
+              <td><a href="#emp-5">Eve Davis</a></td>
+              <td>Engineering</td>
+              <td>Tech Lead</td>
+              <td><span class="status active">Active</span></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="4">Total employees</td>
+              <td id="total-count">5</td>
+            </tr>
+          </tfoot>
+        </table>
+      </section>
+
+      <!-- Cards Section -->
+      <section id="cards-section">
+        <h2>Product Cards</h2>
+        <div class="card-grid" id="cards">
+          <div class="card" id="card-1" data-product="alpha">
+            <h4>Alpha</h4>
+            <p>A fast, lightweight solution.</p>
+            <span class="badge">New</span>
+            <button type="button" class="btn-add" data-id="alpha">Add</button>
+          </div>
+          <div class="card" id="card-2" data-product="beta">
+            <h4>Beta</h4>
+            <p>Full-featured enterprise tier.</p>
+            <span class="badge">Popular</span>
+            <button type="button" class="btn-add" data-id="beta">Add</button>
+          </div>
+          <div class="card" id="card-3" data-product="gamma">
+            <h4>Gamma</h4>
+            <p>Experimental preview build.</p>
+            <span class="badge">Beta</span>
+            <button type="button" class="btn-add" data-id="gamma">Add</button>
+          </div>
+          <div class="card" id="card-4" data-product="delta">
+            <h4>Delta</h4>
+            <p>Legacy support package.</p>
+            <button type="button" class="btn-add" data-id="delta">Add</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Simple Form -->
+      <section id="simple-form">
+        <h2>Simple Form</h2>
+        <form id="contact-form" action="#" method="post" novalidate>
+          <label for="name-input">Full Name</label>
+          <input type="text" id="name-input" name="name" placeholder="Jane Doe" />
+
+          <label for="email-input">Email Address</label>
+          <input type="email" id="email-input" name="email" placeholder="jane@example.com" />
+
+          <label for="message-input">Message</label>
+          <textarea id="message-input" name="message" rows="4" placeholder="Your message here…"></textarea>
+
+          <div style="margin-top: 12px; display: flex; gap: 8px;">
+            <button type="submit" id="submit-btn">Send</button>
+            <button type="reset" id="reset-btn">Clear</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Complex Form -->
+      <section id="complex-form">
+        <h2>Complex Form</h2>
+        <form id="settings-form" action="#" method="post">
+
+          <fieldset id="fs-account">
+            <legend>Account</legend>
+
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" autocomplete="username" />
+
+            <label for="role-select">Role</label>
+            <select id="role-select" name="role">
+              <optgroup label="Staff">
+                <option value="dev">Developer</option>
+                <option value="qa">QA Engineer</option>
+              </optgroup>
+              <optgroup label="Management">
+                <option value="lead">Team Lead</option>
+                <option value="mgr">Manager</option>
+              </optgroup>
+            </select>
+          </fieldset>
+
+          <fieldset id="fs-preferences">
+            <legend>Preferences</legend>
+
+            <label>Theme</label>
+            <div id="theme-options">
+              <label><input type="radio" name="theme" value="light" checked /> Light</label>
+              <label><input type="radio" name="theme" value="dark" /> Dark</label>
+              <label><input type="radio" name="theme" value="system" /> System</label>
+            </div>
+
+            <label>Notifications</label>
+            <div id="notif-options">
+              <label><input type="checkbox" name="notif" value="email" checked /> Email</label>
+              <label><input type="checkbox" name="notif" value="sms" /> SMS</label>
+              <label><input type="checkbox" name="notif" value="push" /> Push</label>
+            </div>
+
+            <label for="timezone">Timezone</label>
+            <select id="timezone" name="timezone">
+              <option value="UTC">UTC</option>
+              <option value="EST">EST (UTC-5)</option>
+              <option value="PST">PST (UTC-8)</option>
+              <option value="CET">CET (UTC+1)</option>
+            </select>
+          </fieldset>
+
+          <fieldset id="fs-danger" class="danger-zone">
+            <legend>Danger Zone</legend>
+            <p>These actions are irreversible.</p>
+            <button type="button" id="btn-delete-account" class="btn-danger">Delete Account</button>
+            <button type="button" id="btn-reset-data" class="btn-danger">Reset All Data</button>
+          </fieldset>
+
+          <div style="margin-top: 16px;">
+            <button type="submit" id="save-btn">Save Settings</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Misc Section -->
+      <section id="misc">
+        <h2>Miscellaneous Elements</h2>
+
+        <!-- Nested definition list -->
+        <dl id="glossary">
+          <dt>XPath</dt>
+          <dd>A query language for selecting nodes in XML/HTML documents.</dd>
+          <dt>CSS Selector</dt>
+          <dd>A pattern used to select elements in a document by type, class, ID, or attribute.</dd>
+          <dt>DOM</dt>
+          <dd>Document Object Model — a tree-structured representation of an HTML or XML document.</dd>
+        </dl>
+
+        <!-- Deeply nested div structure -->
+        <div id="deep-nest" class="level-1">
+          <div class="level-2" data-depth="2">
+            <div class="level-3" data-depth="3">
+              <div class="level-4" data-depth="4">
+                <span id="deep-span">I am deeply nested</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mixed inline elements -->
+        <p id="mixed-inline">
+          This paragraph has <strong>bold</strong>, <em>italic</em>, <u>underlined</u>,
+          <s>strikethrough</s>, a <a href="#misc">link</a>, a <code>code snippet</code>,
+          a <abbr title="Hypertext Markup Language">HTML</abbr> abbreviation,
+          and a <mark>highlighted</mark> word.
+        </p>
+
+        <!-- Figure -->
+        <figure id="sample-figure">
+          <figcaption>Figure 1: Example of a figure element with a caption.</figcaption>
+        </figure>
+
+        <!-- Details / Summary -->
+        <details id="faq-1">
+          <summary>What is the difference between XPath 1.0 and 2.0?</summary>
+          <p>XPath 2.0 adds a richer type system, more built-in functions, and support for sequences.
+             Browsers natively support XPath 1.0 via <code>document.evaluate()</code>.</p>
+        </details>
+        <details id="faq-2">
+          <summary>Can I use XPath in JavaScript?</summary>
+          <p>Yes — use <code>document.evaluate(xpathExpression, contextNode, null,
+             XPathResult.ANY_TYPE, null)</code> in modern browsers.</p>
+        </details>
+
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer id="page-footer">
+    <p>XPath Test Page &copy; 2026 &mdash; for selector testing purposes only.</p>
+    <nav aria-label="Footer navigation">
+      <a href="#articles">Articles</a> |
+      <a href="#table-section">Table</a> |
+      <a href="#cards-section">Cards</a> |
+      <a href="#misc">Misc</a>
+    </nav>
+  </footer>
+
+</body>
+<script src="script.js"></script>
+</html>
