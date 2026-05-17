@@ -11,7 +11,7 @@ The generated selector should be:
 
 There are 2 heuristics that guided the design: 
 - (1) very few attributes are robust, and 
-- (2) referencing ancestor elements should be minimized to avoid UI changes (for example, a wrapper div is added).
+- (2) Referencing ancestor elements should be minimized to avoid breaking on a UI change(for example, a wrapper div is added).
 
 Not all attributes are robust to page refreshes, UI changes, etc. Therefore, we only consider a few attributes as stable anchors: id, aria-label, and data-testid. I found other attributes, like class or role, to be unstable. This list can expand and contract in production-grade testing.*
 
@@ -19,7 +19,7 @@ To be robust, we want to reference as little of the page as possible. This means
 
 The algorithm starts from the selected element and walks upward through it's ancestors until a stable anchor is found. At each step, it attempts to add a stable anchor, a parent element, and a positional index. A stable anchor is only added when present, and a positional index is only added if the element doesn't have a stable anchor AND the child has at least 1 sibling of the same type (to avoid redundant indexing). At every step, the selector is validated with document.evaluate(...). Once the selector **uniquely** identifies the element, it is returned immediately. No more steps are taken, as to reference as little of the page as possible.
 
-A common use case is if the selected element, or a close ancestor, has an id. This will result in selectors of the form:
+A common case is if the selected element, or a close ancestor, has an id. This will result in selectors of the form:
 - //h2[@id="..."]
 - //div[@id="page-header"]/div/div/span/span (real world example on a YT channel name)
 
